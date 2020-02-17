@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:id="@+id/framelayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1" />
+
+    <RadioGroup
+        android:id="@+id/rg_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/home_bottom_parent_bg"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_home"
+            style="@style/MainButtonStyle"
+            android:drawableTop="@drawable/home_button_selector"
+            android:text="首 页" />
+
+        <RadioButton
+            android:id="@+id/rb_type"
+            style="@style/MainButtonStyle"
+            android:drawableTop="@drawable/type_button_selector"
+            android:text="分 类" />
+
+        <RadioButton
+            android:id="@+id/rb_comunity"
+            style="@style/MainButtonStyle"
+            android:paddingTop="11dp"
+            android:drawableTop="@drawable/comunity_button_selector"
+            android:text="发 现" />
+
+        <RadioButton
+            android:id="@+id/rb_cart"
+            style="@style/MainButtonStyle"
+            android:drawableTop="@drawable/cart_button_selector"
+            android:text="购物车" />
+
+        <RadioButton
+            android:id="@+id/rb_user"
+            style="@style/MainButtonStyle"
+            android:drawableTop="@drawable/user_button_selector"
+            android:text="个人中心" />
+    </RadioGroup>
+</LinearLayout>
