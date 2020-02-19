@@ -33,7 +33,7 @@
         <RadioButton
             android:id="@+id/rb_comunity"
             style="@style/MainButtonStyle"
-            android:paddingTop="11dp"
+            android:paddingTop="12dp"
             android:drawableTop="@drawable/comunity_button_selector"
             android:text="发 现" />
 
