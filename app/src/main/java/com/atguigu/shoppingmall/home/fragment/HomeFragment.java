@@ -1,5 +1,6 @@
 package com.atguigu.shoppingmall.home.fragment;
 
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -10,13 +11,12 @@ import android.widget.Toast;
 import com.alibaba.fastjson.JSON;
 import com.atguigu.shoppingmall.R;
 import com.atguigu.shoppingmall.base.BaseFragment;
+import com.atguigu.shoppingmall.home.adapter.HomeFragmentAdapter;
 import com.atguigu.shoppingmall.home.bean.ResultBeanData;
 import com.atguigu.shoppingmall.utils.Constants;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.StringCallback;
-
 import okhttp3.Call;
-import okhttp3.Request;
 
 /**
  * Created by Jackqgm on 2020/2/19.
@@ -31,6 +31,7 @@ public class HomeFragment extends BaseFragment {
     private TextView tv_search_home;
     private TextView tv_message_home;
     private ResultBeanData.ResultBean resultBean;
+    private HomeFragmentAdapter adapter;
 
     /**
      * 返回的数据
@@ -67,12 +68,12 @@ public class HomeFragment extends BaseFragment {
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                         Log.e(TAG, "首页请求失败==="+e.getMessage());
+                        Log.e(TAG, "首页请求失败===" + e.getMessage());
                     }
 
                     @Override
                     public void onResponse(String response, int id) {
-                        Log.e(TAG, "首页请求成功==="+response);
+                        Log.e(TAG, "首页请求成功===" + response);
                         //解析数据
                         processData(response);
                     }
@@ -82,7 +83,30 @@ public class HomeFragment extends BaseFragment {
     private void processData(String json) {
         ResultBeanData resultBeanData = JSON.parseObject(json, ResultBeanData.class);
         resultBean = resultBeanData.getResult();
-        Log.e(TAG, "解析成功=="+resultBean.getHot_info().get(0).getName());
+        if (resultBean != null) {
+            //有数据,设置适配器
+            adapter = new HomeFragmentAdapter(mContext, resultBean);
+            rvHome.setAdapter(adapter);
+            GridLayoutManager manager = new GridLayoutManager(mContext, 1);
+            manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup(){
+                @Override
+                public int getSpanSize(int position) {
+                    if (position<=3){
+                        ib_top.setVisibility(View.GONE);
+                    }else{
+                        ib_top.setVisibility(View.VISIBLE);
+                    }
+                    return 1;
+                }
+            });
+            //设置布局管理者
+            rvHome.setLayoutManager(manager);
+
+        } else {
+            //没有数据
+
+        }
+        Log.e(TAG, "解析成功==" + resultBean.getHot_info().get(0).getName());
     }
 
     private void initListener() {
@@ -92,7 +116,7 @@ public class HomeFragment extends BaseFragment {
             public void onClick(View v) {
                 //回到顶部
                 rvHome.scrollToPosition(0);
-                Toast.makeText(mContext, "回到顶部", Toast.LENGTH_SHORT).show();
+                Log.e(TAG, "回到顶部");
             }
         });
 

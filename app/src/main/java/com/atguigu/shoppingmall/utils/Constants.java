@@ -7,8 +7,12 @@ package com.atguigu.shoppingmall.utils;
 
 public class Constants {
 
-    public static String BASE_URL = "http://192.168.43.144:8080";
+    public static String BASE_URL = "http://192.168.43.144:8080/atguigu";
 
-    public static String HOME_URL = BASE_URL + "/atguigu/json/HOME_URL.json";
+    //public static String BASE_URL = "http://192.168.1.21:8080/atguigu";
+
+    public static String HOME_URL = BASE_URL + "/json/HOME_URL.json";
+
+    public static String BASE_URL_IMAGE = BASE_URL + "/img";
 }
 
