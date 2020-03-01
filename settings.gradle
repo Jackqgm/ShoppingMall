@@ -1,2 +1,2 @@
-include ':app', ':banner'
+include ':app', ':banner', ':addsubview'
 include ':ScrollViewContainer'
